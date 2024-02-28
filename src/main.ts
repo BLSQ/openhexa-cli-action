@@ -34,7 +34,8 @@ export async function run(): Promise<void> {
       'workspaces',
       'add',
       workspace,
-      `token=${token}`
+      '--token',
+      token
     ])
     core.info('Configuring openhexa.sdk... Done!')
     core.info(
