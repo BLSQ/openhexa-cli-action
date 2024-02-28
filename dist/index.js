@@ -4015,7 +4015,8 @@ async function run() {
             'workspaces',
             'add',
             workspace,
-            `token=${token}`
+            '--token',
+            token
         ]);
         core.info('Configuring openhexa.sdk... Done!');
         core.info("OpenHEXA is now configured and ready to use! Just run 'openhexa' to see the available commands.");
