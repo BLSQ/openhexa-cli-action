@@ -1,0 +1,32 @@
+name: 'OpenHEXA CLI configuration'
+description: 'Install & configure the openhexa CLI'
+author: 'Bluesquare'
+
+# Add your action's branding here. This will appear on the GitHub Marketplace.
+# branding:
+#   icon: 'heart'
+#   color: 'red'
+
+# Define your inputs here.
+inputs:
+  workspace:
+    description: 'Slug of the workspace to configure'
+    required: true  
+  token:
+    description: 'Your OpenHEXA API token'
+    required: true
+  url:
+    description: 'OpenHEXA API URL'
+    required: false
+    default: 'https://api.openhexa.org'
+  install_python:
+    description: 'Install python?'
+  
+# Define your outputs here.
+# outputs:
+#   time:
+#     description: 'Your output description here'
+
+runs:
+  using: node20
+  main: dist/index.js
