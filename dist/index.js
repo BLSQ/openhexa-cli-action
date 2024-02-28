@@ -4011,13 +4011,9 @@ async function run() {
         core.info('Installing openhexa.sdk... Done!');
         core.info('Configuring openhexa.sdk...');
         await exec.exec('openhexa', ['config', 'set_url', url]);
-        await exec.exec('openhexa', [
-            'workspaces',
-            'add',
-            workspace,
-            '--token',
-            token
-        ]);
+        await exec.exec('openhexa', ['workspaces', 'add', workspace], {
+            env: { HEXA_TOKEN: token }
+        });
         core.info('Configuring openhexa.sdk... Done!');
         core.info("OpenHEXA is now configured and ready to use! Just run 'openhexa' to see the available commands.");
     }
