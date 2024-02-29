@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   test-typescript:
+    timeout-minutes: 5
     name: TypeScript Tests
     runs-on: ubuntu-latest
 
@@ -41,6 +42,7 @@ jobs:
         run: npm run lint
 
   test-action:
+    timeout-minutes: 5
     name: GitHub Actions Test
     runs-on: ubuntu-latest
 
@@ -56,6 +58,7 @@ jobs:
           workspace: my-test-workspace
           token: my-secret-token
           install_python: true
+          openhexa_version: main
       - name: Check openhexa config
         id: output
         run: openhexa config

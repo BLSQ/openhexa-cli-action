@@ -21,6 +21,9 @@ inputs:
     default: 'https://api.openhexa.org'
   install_python:
     description: 'Install python?'
+  openhexa_version:
+    description: 'OpenHEXA version to install'
+    required: false
   
 # Define your outputs here.
 # outputs:

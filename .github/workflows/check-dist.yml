@@ -22,6 +22,7 @@ permissions:
 
 jobs:
   check-dist:
+    timeout-minutes: 5
     name: Check dist/
     runs-on: ubuntu-latest
 
