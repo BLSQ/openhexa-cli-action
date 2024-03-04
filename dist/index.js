@@ -7286,11 +7286,11 @@ async function run() {
         }
         // Install openhexa.sdk
         try {
-            if (!semver_1.default || semver_1.default.valid(version)) {
+            if (!version || semver_1.default.valid(version)) {
                 core.info(`Installing openhexa.sdk ${version}...`);
                 await exec.exec(`pip install openhexa.sdk${version ? `==${version}` : ''}`);
             }
-            else if (semver_1.default) {
+            else if (version) {
                 // We have a git branch
                 core.info(`Installing openhexa.sdk from branch ${version}`);
                 await exec.exec(`pip install https://github.com/blsq/openhexa-sdk-python/archive/refs/heads/${version}.zip`);

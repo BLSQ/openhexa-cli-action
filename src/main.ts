@@ -22,12 +22,12 @@ export async function run(): Promise<void> {
 
     // Install openhexa.sdk
     try {
-      if (!semver || semver.valid(version)) {
+      if (!version || semver.valid(version)) {
         core.info(`Installing openhexa.sdk ${version}...`)
         await exec.exec(
           `pip install openhexa.sdk${version ? `==${version}` : ''}`
         )
-      } else if (semver) {
+      } else if (version) {
         // We have a git branch
         core.info(`Installing openhexa.sdk from branch ${version}`)
         await exec.exec(
