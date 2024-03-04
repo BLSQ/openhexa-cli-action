@@ -12,12 +12,12 @@ export async function run(): Promise<void> {
     const token: string = core.getInput('token')
     const url: string = core.getInput('url')
     const install_python = core.getInput('install_python')
-    let version = core.getInput('openhexa_version')
+    const version = core.getInput('openhexa_version')
 
     // Install python if requested
     if (install_python === 'true') {
       await exec.exec('sudo apt-get update')
-      await exec.exec('sudo apt-get install python3.11')
+      await exec.exec('sudo apt-get install -y python3.11')
     }
 
     // Install openhexa.sdk
@@ -25,7 +25,7 @@ export async function run(): Promise<void> {
       if (!semver || semver.valid(version)) {
         core.info(`Installing openhexa.sdk ${version}...`)
         await exec.exec(
-          `pip install openhexa.sdk` + (version ? `==${version}` : '')
+          `pip install openhexa.sdk${version ? `==${version}` : ''}`
         )
       } else if (semver) {
         // We have a git branch
