@@ -39,7 +39,6 @@ export async function run(): Promise<void> {
     const res = await exec.exec('openhexa', ['workspaces', 'add', workspace], {
       env: { HEXA_TOKEN: token }
     })
-    core.info(`${res}`)
     if (res !== 0) {
       throw new Error('Failed to add workspace to openhexa.sdk')
     }
