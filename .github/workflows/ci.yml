@@ -43,22 +43,37 @@ jobs:
 
   test-action:
     timeout-minutes: 5
-    name: GitHub Actions Test
+    name: Test Action
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
-
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
       - name: Test Local Action
         id: test-action
         uses: ./
         with:
           workspace: my-test-workspace
           token: my-secret-token
-          install_python: true
-          openhexa_version: main
       - name: Check openhexa config
-        id: output
-        run: openhexa config
+        id: test
+        run: echo 'config=$(openhexa config)' >> "$GITHUB_OUTPUT"
+      - name: Validate output
+        id: validate
+        run: |
+          echo "Output: ${{ steps.test.outputs.config }}"
+          expected_text="Debug: False
+          Backend URL: https://api.openhexa.org
+          No current workspace
+          
+          Workspaces:"
+
+          echo "Expected: $expected_text"
+          if [ "${{ steps.test.outputs.config }}" != "$expected_text" ]; then
+            echo "Output does not match expected config"
+            exit 1
+          fi
