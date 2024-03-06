@@ -7304,7 +7304,6 @@ async function run() {
             'workspaces',
             'add',
             workspace,
-            '--yes',
             '--token',
             token
         ]);
