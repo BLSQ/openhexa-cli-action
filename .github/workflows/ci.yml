@@ -50,18 +50,22 @@ jobs:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
+
       - uses: actions/setup-python@v2
         with:
           python-version: '3.11'
+
       - name: Test Local Action
         id: test-action
         uses: ./
         with:
           workspace: my-test-workspace
           token: my-secret-token
+
       - name: Check openhexa config
         id: test
         run: echo 'config=$(openhexa config)' >> "$GITHUB_OUTPUT"
+
       - name: Validate output
         id: validate
         run: |
