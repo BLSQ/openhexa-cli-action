@@ -13,6 +13,9 @@ export async function run(): Promise<void> {
     const url: string = core.getInput('url')
     const version = core.getInput('openhexa_version')
 
+    if (!token) {
+      throw new Error("Input 'token' is required")
+    }
     // Install openhexa.sdk
     try {
       if (!version || semver.valid(version)) {
@@ -28,8 +31,8 @@ export async function run(): Promise<void> {
         )
       }
     } catch (err) {
-      core.setFailed(
-        `Failed to install openhexa.sdk: ${err}. Do you need to install python? Use 'install_python: true'`
+      throw new Error(
+        `Failed to install openhexa.sdk: ${err}. Please make sure you have added a step to install python.`
       )
     }
     core.info('Installing openhexa.sdk... Done!')
