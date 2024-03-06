@@ -7278,6 +7278,9 @@ async function run() {
         const token = core.getInput('token');
         const url = core.getInput('url');
         const version = core.getInput('openhexa_version');
+        if (!token) {
+            throw new Error("Input 'token' is required");
+        }
         // Install openhexa.sdk
         try {
             if (!version || semver_1.default.valid(version)) {
@@ -7291,15 +7294,19 @@ async function run() {
             }
         }
         catch (err) {
-            core.setFailed(`Failed to install openhexa.sdk: ${err}. Do you need to install python? Use 'install_python: true'`);
+            throw new Error(`Failed to install openhexa.sdk: ${err}. Please make sure you have added a step to install python.`);
         }
         core.info('Installing openhexa.sdk... Done!');
         core.info('Configuring openhexa.sdk...');
         await exec.exec('openhexa', ['config', 'set_url', url]);
         core.info(`Adding workspace ${workspace} to openhexa.sdk...`);
-        const res = await exec.exec('openhexa', ['workspaces', 'add', workspace], {
-            env: { HEXA_TOKEN: token }
-        });
+        const res = await exec.exec('openhexa', [
+            'workspaces',
+            'add',
+            workspace,
+            '--token',
+            token
+        ]);
         if (res !== 0) {
             throw new Error('Failed to add workspace to openhexa.sdk');
         }
