@@ -43,7 +43,6 @@ export async function run(): Promise<void> {
       'workspaces',
       'add',
       workspace,
-      '--yes',
       '--token',
       token
     ])
