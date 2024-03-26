@@ -72,7 +72,7 @@ jobs:
           echo "Output: ${{ steps.test.outputs.config }}"
           expected_text="Debug: False
           Backend URL: https://api.openhexa.org
-          No current workspace
+          Workspace: None
           
           Workspaces:"
 
